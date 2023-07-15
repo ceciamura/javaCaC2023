@@ -4,31 +4,37 @@ import java.time.LocalDateTime;
 
 public class Libro extends Articulo {
     
-    private String isbn;
+  //atributo
+  private String isbn;
 
-    public Libro(Long id, String titulo, double precio, String imagen, String autor, boolean novedad,
-            LocalDateTime fechaCreacion, String codigo, String isbn) {
+  //constructor/es
+  public Libro(
+      String titulo,
+      String imagen,
+      String autor,
+      double precio,
+      boolean novedad,
+      String isbn,
+      String codigo,
+      LocalDateTime fechaCreacion 
+      ) {
+          //1 - nace el padre
+          super(titulo, imagen, autor, precio, novedad,codigo,fechaCreacion);
 
-        super(id, titulo, precio, imagen, autor, novedad, fechaCreacion, codigo);
-        
-        this.isbn = isbn;
-    }
+          //2 - nace el hijo
+          this.isbn = isbn;
+  }
+  
+  //metodos
+  public String obtenerIsbn() {
+      return this.isbn;
+  }
 
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-
-    @Override
-    public String toString() {
-      
-        return super.toString() + ", Libro [isbn=" + isbn + "]";
-    }
-
-    
+  @Override
+  public String toString() {
+      //el toString del padre + el del hijo
+      return super.toString() + ", Libro [isbn=" + isbn + "]";
+  }
+  
 
 }

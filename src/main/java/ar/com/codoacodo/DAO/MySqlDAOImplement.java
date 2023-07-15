@@ -85,7 +85,7 @@ public class MySqlDAOImplement implements DAO {
     @Override
     public void create(Articulo articulo) throws Exception {
         String sql = "insert into "+this.tableName;
-        sql += "(titulo,autor,precio,fecha_creacion,novedad,codigo) ";
+        sql += "(titulo,autor,precio,fechaCreacion,novedad,codigo) ";
         sql += "values (?,?,?,?,?,?) ";
 //                      1 2 3 4 5
          //Obtener la Conection
