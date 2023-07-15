@@ -73,6 +73,7 @@ public class MySqlDAOImplement implements DAO {
     @Override
     public ArrayList<Articulo> findAll() throws Exception{
         String sql = "select * from "+this.tableName+"";
+        
 
         return findBySQL(sql);
     }
@@ -87,7 +88,7 @@ public class MySqlDAOImplement implements DAO {
         String sql = "insert into "+this.tableName;
         sql += "(titulo,autor,precio,fechaCreacion,novedad,codigo) ";
         sql += "values (?,?,?,?,?,?) ";
-//                      1 2 3 4 5
+//                      1 2 3 4 5 
          //Obtener la Conection
         Connection con = AdministradorDeConexiones.getConnection();
 
@@ -135,12 +136,12 @@ public class MySqlDAOImplement implements DAO {
         while(res.next()) {
             Long id = res.getLong(1);
             String titulo = res.getString(2);
-            String imagen = res.getString(3);
-            String autor = res.getString(4);
-            Long novedad = res.getLong(5);
-            Date fechaCreacion = res.getDate(6);
             String codigo = res.getString(7);
             Double precio = res.getDouble(8);
+            Date fechaCreacion = res.getDate(6);
+            String autor = res.getString(4);
+            Long novedad = res.getLong(5);
+            String imagen = res.getString(3);
 
             boolean esNovedad = novedad.equals(1L);//long 
             //TODO:
