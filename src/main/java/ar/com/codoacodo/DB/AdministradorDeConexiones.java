@@ -10,7 +10,7 @@ public class AdministradorDeConexiones {
 		String hosts = "127.0.0.1";//localhost
 		String port = "3306";
 		String username = "root";
-		String password = "Chulove86!";
+		String password = "root";
 		
 		//driver de conexion a la base de datos
 		String driverClassName = "com.mysql.cj.jdbc.Driver";
