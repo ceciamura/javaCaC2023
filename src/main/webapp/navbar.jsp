@@ -24,7 +24,7 @@
         </ul>
         <form class="d-flex" 
             role="search" 
-            action="<%=request.getContextPath()%>/BuscadorController"
+            action="<%=request.getContextPath()%>/BuscadorArticuloController"
             method="GET">
           <input name="clave" 
             id="clave"

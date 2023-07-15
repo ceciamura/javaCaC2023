@@ -24,36 +24,35 @@ public class MySqlDAOImplement implements DAO {
 
     //metodos
     //va a cumplir ese contrato entre DAO y esta clase
-    public Articulo getById(Long id) throws Exception {//1
-        String sql = "select * from "+this.tableName+" where id =?";
-
-        //Obtener la Conection
-        
-        Connection con = AdministradorDeConexiones.getConnection();
-
-        //PreparedStatement con mi sql
-        PreparedStatement pst = con.prepareStatement(sql);
-
-        pst.setLong(1,id);
-
-        Articulo articulo = null;
-
-        ResultSet res = pst.executeQuery();
-
-        if(res.next()) {
-            Long _id = res.getLong(1);
-            String titulo = res.getString(2);
-            String imagen = res.getString(3);
-            String autor = res.getString(4);
-            String novedad = res.getString(5);
-            Date fechaCreacion = res.getDate(6);
-            String codigo = res.getString(7);
-            Double precio = res.getDouble(8);
-
-            articulo = new Articulo(_id, titulo, imagen, autor, precio, false, codigo, LocalDateTime.now());
+        public Articulo getById(Long id) throws Exception {//1
+            String sql = "select * from "+this.tableName+" where id =?";
+    
+            //Obtener la Conection
+            Connection con = AdministradorDeConexiones.getConnection();
+    
+            //PreparedStatement con mi sql
+            PreparedStatement pst = con.prepareStatement(sql);
+    
+            pst.setLong(1,id);
+    
+            Articulo articulo = null;
+    
+            ResultSet res = pst.executeQuery();
+    
+            if(res.next()) {
+                Long _id = res.getLong(1);
+                String titulo = res.getString(2);
+                String imagen = res.getString(3);
+                String autor = res.getString(4);
+                String novedad = res.getString(5);
+                Date fechaCreacion = res.getDate(6);
+                String codigo = res.getString(7);
+                Double precio = res.getDouble(8);
+    
+                articulo = new Articulo(_id, titulo, imagen, autor, precio, false, codigo, LocalDateTime.now());
+            }
+            return articulo;
         }
-        return articulo;
-    }
 
     @Override
     public void delete(Long id) throws Exception {
@@ -80,7 +79,24 @@ public class MySqlDAOImplement implements DAO {
 
     @Override
     public void update(Articulo articulo) {
-        String sql = "update "+this.tableName+" set titulo= , precio= , autor= ";
+        String sql = "UPDATE " + this.tableName + " SET titulo=?, precio=?, autor=? WHERE id=?";
+
+
+        try (Connection con = AdministradorDeConexiones.getConnection();
+             PreparedStatement statement = con.prepareStatement(sql)) {
+
+            statement.setString(1, articulo.getTitulo());
+            statement.setDouble(2, articulo.getPrecio());
+            statement.setString(3, articulo.getAutor());
+            statement.setLong(4, articulo.getId());
+
+            statement.executeUpdate();
+
+
+        } catch (SQLException e) {
+            // Manejar la excepción
+            e.getMessage();
+        }
     }
 
     @Override
